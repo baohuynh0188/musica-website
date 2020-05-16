@@ -70,6 +70,16 @@ namespace MusicaWebsite.Models
         public string Email { get; set; }
 
         [Required]
+        [StringLength(255)]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+        [Required]
+        [StringLength(255)]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+        
+
+        [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
@@ -79,6 +89,18 @@ namespace MusicaWebsite.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+        [Required]
+        [Display(Name = "Date")]
+        public int Date { get; set; }
+        [Required]
+        [Display(Name = "Month")]
+        public int Month { get; set; }
+        [Required]
+        [Display(Name = "Year")]
+        public int Year { get; set; }
+        [Required]
+        [Display(Name = "Gender")]
+        public string Gender { get; set; }
     }
 
     public class ResetPasswordViewModel
@@ -109,4 +131,11 @@ namespace MusicaWebsite.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
+    public class MainPageModel
+    {
+        public RegisterViewModel RegisterViewModel { get; set; }
+        public LoginViewModel LoginViewModel { get; set; }
+    }
 }
+
+
