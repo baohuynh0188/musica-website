@@ -9,36 +9,262 @@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <!-- Wrapper -->
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div class="" id="sidebar-wrapper">
+            <div class="sidebar-heading">WeSound</div>
+            <div class="list-group list-group-flush border-0">
+                <a href="#" class="list-group-item list-group-item-action border-0 rounded active">
+                    <i class="fas fa-home"></i>&nbsp;Home
+                </a>
+                <a href="#" class="list-group-item list-group-item-action border-0 rounded">
+                    <i class="fas fa-search"></i>&nbsp;Search
+                </a>
+                <!-- if authenticated -->
+                <!-- <a href="#" class="list-group-item list-group-item-action border-0 rounded"><i
+                class="fas fa-headphones-alt"></i>&nbsp;Your Library</a> -->
+                <!-- /if authenticated -->
+                <!-- if not authenticated -->
+                <a href="#" class="list-group-item list-group-item-action border-0 rounded" data-toggle="modal"
+                   data-target="#requireLoginModal"><i class="fas fa-headphones-alt"></i>&nbsp;Your Library</a>
+                <!-- /if not authenticated -->
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
+        </div>
+        <!-- /#sidebar-wrapper -->
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <nav class="navbar navbar-expand-lg">
+                <button class="btn btn-primary" id="menu-toggle"><i class="far fa-play-circle"></i></button>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div class="rounded-pill ml-3" id="search">
+                        <span class="input-group-append text-dark mt-3 ml-3">
+                            <i class="fa fa-search"></i>
+                        </span>
+                        <input id="searchbar" type="search" class="form-control form-control-sm ml-5 mt-n4 border-0"
+                               placeholder="Search for Artists, Songs or Podcast ">
+                    </div>
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </nav>
+            @RenderBody()
+            <div class="col-md-12 fixed-bottom text-center" id="now-playing-bar">
+                <div class="player-control">
+                    <div class="control-button-wrapper">
+                        <i class="fas fa-random"></i>
+                        <i class="fas fa-step-backward"></i>
+                        <i class="far fa-play-circle" id="play-button"></i>
+                        <i class="fas fa-step-forward"></i>
+                        <i class="fas fa-redo"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Page Content Wrapper-->
+    </div>
+    <!-- /Wrapper-->
+    <!--/ Require Login Modal -->
+    <div id="requireLoginModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content bg-primary">
+                <div class="modal-body">
+                    <div class="row text-light">
+                        <div class="col-md-6">
+                            <h2>Get your free WeSound account</h2>
+                            <ul>
+                                <li>
+                                    <i class="fas fa-check"></i>
+                                    No credit card
+                                </li>
+                                <li>
+                                    <i class="fas fa-check"></i>
+                                    Share your songs
+                                </li>
+                                <li>
+                                    <i class="fas fa-check"></i>
+                                    Discover new music
+                                </li>
+                            </ul>
+                            <a class="text-light" href="#" data-toggle="modal" data-dismiss="modal">CLOSE</a>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card bg-light border-0 shadow">
+                                <div class="card-body">
+
+                                    <button class="btn btn-success rounded-pill w-80 mx-auto d-block" data-toggle="modal"
+                                            data-dismiss="modal" data-target="#registerModal">
+                                        SIGN UP FREE
+                                    </button>
+                                    <hr>
+                                    <div class="row">
+                                        <p class="text-dark text-center">Don't have an account?</p>
+                                        <button class="btn btn-secondary rounded-pill w-80 mx-auto d-block" data-toggle="modal"
+                                                data-dismiss="modal" data-target="#registerModal">
+                                            LOG
+                                            IN
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+    <!--/ Require Login Modal -->
+    <!--/Login Modal -->
+    <div id="loginModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title text-dark">LOG IN</h4>
+                    <button type="button" class="close ml-auto" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form action="/login">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success rounded-pill w-50 mx-auto d-block">
+                                LOG
+                                IN
+                            </button>
+                            <p class="text-dark text-center">
+                                <a href=" #" data-toggle="modal" data-dismiss="modal"
+                                   data-target="#loginModal">Forgot your password?</a>
+                            </p>
+                        </div>
+                    </form>
+                    <p class="text-dark text-center">Don't have an account?</p>
+                    <div class=" row">
+                        <button class="btn btn-secondary rounded-pill w-80 mx-auto d-block" data-toggle="modal" data-dismiss="modal"
+                                data-target="#registerModal">
+                            LOG
+                            IN FOR WESOUND
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    <!--/Login Modal -->
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title text-dark">SIGN UP</h4>
+                    <button type="button" class="close ml-auto" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form action="">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" placeholder="First Name">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" placeholder="Last Name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Confirm Password">
+                        </div>
+                        <div class="form-group">
+                            <label class="text-dark" for="">Date of Birth</label>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" placeholder="Date">
+                                </div>
+                                <div class="col-md-4">
+                                    <select name="month" class="form-control">
+                                        <option value="" disabled selected>Month</option>
+                                        <option value="01">January</option>
+                                        <option value="02">February</option>
+                                        <option value="03">March</option>
+                                        <option value="04">April</option>
+                                        <option value="05">May</option>
+                                        <option value="06">June</option>
+                                        <option value="07">July</option>
+                                        <option value="08">August</option>
+                                        <option value="09">September</option>
+                                        <option value="10">October</option>
+                                        <option value="11">November</option>
+                                        <option value="12">December</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" placeholder="Year">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group text-dark align-item-center">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"
+                                       checked="checked">
+                                <label class="form-check-label" for="inlineRadio1">Male</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                                       value="option2">
+                                <label class="form-check-label" for="inlineRadio2">Female</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3"
+                                       value="option3">
+                                <label class="form-check-label" for="inlineRadio3">Other</label>
+                            </div>
+                    </form>
+                </div>
+                <div class="row">
+                    <button type="submit" class="btn btn-success rounded-pill w-50 mx-auto d-block" data-dismiss="modal">
+                        Sign
+                        Up
+                    </button>
+                </div>
+                <div class="row">
+                    <p class="text-dark mx-auto d-block">
+                        Alreay have account? <a href="#" data-toggle="modal" data-dismiss="modal"
+                                                data-target="#loginModal">Log In</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/Register Modal -->
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script>
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+        $('.list-group-item').on('click', function () {
+            $(this).addClass('active').siblings().removeClass('active')
+        })
+    </script>
 </body>
 </html>
