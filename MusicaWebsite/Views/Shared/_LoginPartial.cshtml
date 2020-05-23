@@ -1,22 +1,52 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "ml-auto" }))
     {
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
     <ul class="nav navbar-nav navbar-right">
-        <li>
+        <!-- if authenticated -->
+        <li class="nav-item dropdown">
+            @*<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
+                User.Identity.GetUserName()
+            </a>*@
+            @Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class="nav-link dropdown-toggle rounded-pill",
+                 id = "navbarDropdown", role = "button", data_toggle = "dropdown",
+                    aria_haspopup = "true", aria_expanded = "false"
+            })
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Profile</a>
+                <a class="dropdown-item" href="#">Account</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+            </div>
+        </li> 
+        <!-- /if authenticated -->
+        @*<li>
             @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
         </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>*@
     </ul>
+
     }
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
+    @*<ul class="nav navbar-nav navbar-right">
         <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
         <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>*@
+    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+        <li class="nav-item">
+            <a id="signup" type="button" class="nav-link font-weight-bold" data-toggle="modal"
+               data-target="#registerModal">SIGN UP</a>
+        </li>
+        <li class="nav-item">
+            <a id="login" type="button" class="nav-link rounded-pill font-weight-bold" data-toggle="modal"
+               data-target="#loginModal">LOG IN</a>
+        </li>
+        
     </ul>
 }
