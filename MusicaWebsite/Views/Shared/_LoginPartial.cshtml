@@ -39,14 +39,10 @@ else
         <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>*@
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-        <li class="nav-item">
-            <a id="signup" type="button" class="nav-link font-weight-bold" data-toggle="modal"
-               data-target="#registerModal">SIGN UP</a>
-        </li>
-        <li class="nav-item">
-            <a id="login" type="button" class="nav-link rounded-pill font-weight-bold" data-toggle="modal"
-               data-target="#loginModal">LOG IN</a>
-        </li>
+        
+        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "signup", @class="nav-link font-weight-bold"})</li>
+
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "login", @class = "nav-link rounded-pill font-weight-bold" })</li>
         
     </ul>
 }

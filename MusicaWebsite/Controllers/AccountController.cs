@@ -66,7 +66,7 @@ namespace MusicaWebsite.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(MainPageModel model, string returnUrl)
+        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
             {
@@ -75,7 +75,7 @@ namespace MusicaWebsite.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.LoginViewModel.Email, model.LoginViewModel.Password, model.LoginViewModel.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -83,7 +83,7 @@ namespace MusicaWebsite.Controllers
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.LoginViewModel.RememberMe });
+                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
@@ -147,21 +147,21 @@ namespace MusicaWebsite.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(MainPageModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { 
-                    UserName = model.RegisterViewModel.Email, 
-                    Email = model.RegisterViewModel.Email,
-                    FirstName = model.RegisterViewModel.FirstName,
-                    LastName = model.RegisterViewModel.LastName,
-                    Date = model.RegisterViewModel.Date,
-                    Month = model.RegisterViewModel.Month,
-                    Year = model.RegisterViewModel.Year,
-                    Gender = model.RegisterViewModel.Gender
+                    UserName = model.Email, 
+                    Email = model.Email,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Date = model.Date,
+                    Month = model.Month,
+                    Year = model.Year,
+                    Gender = model.Gender
                 };
-                var result = await UserManager.CreateAsync(user, model.RegisterViewModel.Password);
+                var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);

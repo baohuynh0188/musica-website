@@ -167,6 +167,9 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\admin\adminAreaRegistration.cs" />
+    <Compile Include="Areas\admin\Controllers\AdminAccountController.cs" />
+    <Compile Include="Areas\admin\Controllers\HomeController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -185,10 +188,19 @@
     <Compile Include="Migrations\202005161838559_UpdateUserProfile1.Designer.cs">
       <DependentUpon>202005161838559_UpdateUserProfile1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006101327375_CreateSongsModel.cs" />
+    <Compile Include="Migrations\202006101327375_CreateSongsModel.Designer.cs">
+      <DependentUpon>202006101327375_CreateSongsModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\Author.cs" />
+    <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Singer.cs" />
+    <Compile Include="Models\Song.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -198,15 +210,23 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\styles.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\scripts.js" />
     <Content Include="webfonts\fa-brands-400.svg" />
     <Content Include="webfonts\fa-regular-400.svg" />
     <Content Include="webfonts\fa-solid-900.svg" />
+    <Content Include="Areas\admin\Views\web.config" />
+    <Content Include="Areas\admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Shared\_SideNavPartial.cshtml" />
+    <Content Include="Areas\admin\Views\Shared\_NavBarPartial.cshtml" />
+    <Content Include="Areas\admin\Views\AdminAccount\Login.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -264,9 +284,13 @@
     <Content Include="webfonts\fa-solid-900.ttf" />
     <Content Include="webfonts\fa-solid-900.woff" />
     <Content Include="webfonts\fa-solid-900.woff2" />
+    <Content Include="Areas\admin\Views\Shared\_LoginLayout.cshtml" />
+    <Content Include="Views\Shared\_RegisterPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\admin\Data\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -290,6 +314,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005161838559_UpdateUserProfile1.resx">
       <DependentUpon>202005161838559_UpdateUserProfile1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006101327375_CreateSongsModel.resx">
+      <DependentUpon>202006101327375_CreateSongsModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -12,19 +12,21 @@ namespace MusicaWebsite.Models
     {
         [Required]
         [StringLength(255)]
-       
         public string FirstName { get; set; }
+
         [Required]
         [StringLength(255)]    
         public string LastName { get; set; }
+
         [Required]
-       
         public int Date { get; set; }
+
         [Required]
-      
         public int Month { get; set; }
+
         [Required]
         public int Year { get; set; }
+
         [Required]
         public string Gender { get; set; }
 
@@ -34,19 +36,6 @@ namespace MusicaWebsite.Models
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             // Add custom user claims here
             return userIdentity;
-        }
-    }
-
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
-    {
-        public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
-        {
-        }
-
-        public static ApplicationDbContext Create()
-        {
-            return new ApplicationDbContext();
         }
     }
 }
