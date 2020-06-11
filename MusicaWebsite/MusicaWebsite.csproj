@@ -168,7 +168,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\admin\adminAreaRegistration.cs" />
-    <Compile Include="Areas\admin\Controllers\AdminAccountController.cs" />
+    <Compile Include="Areas\admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\admin\Controllers\HomeController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -223,10 +223,11 @@
     <Content Include="webfonts\fa-solid-900.svg" />
     <Content Include="Areas\admin\Views\web.config" />
     <Content Include="Areas\admin\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\admin\Views\Home\Index.cshtml" />
     <Content Include="Areas\admin\Views\Shared\_SideNavPartial.cshtml" />
     <Content Include="Areas\admin\Views\Shared\_NavBarPartial.cshtml" />
-    <Content Include="Areas\admin\Views\AdminAccount\Login.cshtml" />
+    <Content Include="Areas\admin\Views\Home\Dashboard.cshtml" />
+    <Content Include="Areas\admin\Views\Account\Login.cshtml" />
+    <Content Include="Areas\admin\Views\Home\Account.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -285,7 +286,6 @@
     <Content Include="webfonts\fa-solid-900.woff" />
     <Content Include="webfonts\fa-solid-900.woff2" />
     <Content Include="Areas\admin\Views\Shared\_LoginLayout.cshtml" />
-    <Content Include="Views\Shared\_RegisterPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

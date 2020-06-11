@@ -23,5 +23,7 @@ namespace MusicaWebsite.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<MusicaWebsite.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }
